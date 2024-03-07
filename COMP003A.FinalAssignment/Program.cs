@@ -33,7 +33,7 @@ namespace COMP003A.FinalAssignment
                 Console.WriteLine("Invalid Input");
             }
             SectionSeparator("Age");
-            Console.WriteLine("Please Enter your age");
+            Console.WriteLine("Please Enter birth year");
             string age = Console.ReadLine();
             int ageCheck = Convert.ToInt32(age);
             if (ValidateAge(age))
