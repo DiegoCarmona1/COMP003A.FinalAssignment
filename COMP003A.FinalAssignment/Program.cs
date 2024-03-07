@@ -18,7 +18,7 @@ namespace COMP003A.FinalAssignment
             string firstName = Console.ReadLine();
             if (ValidateName(firstName))
             {
-                Console.WriteLine("First name recorded");
+                Console.WriteLine("First name recorded successfully");
             } else
             {
                 Console.WriteLine("Invalid Name");
@@ -27,7 +27,7 @@ namespace COMP003A.FinalAssignment
             string lastName = Console.ReadLine();
             if (ValidateName(lastName))
             {
-                Console.WriteLine("Last name recorded");
+                Console.WriteLine("Last name recorded successfully");
             } else
             {
                 Console.WriteLine("Invalid Input");
@@ -36,6 +36,14 @@ namespace COMP003A.FinalAssignment
             Console.WriteLine("Please Enter your age");
             string age = Console.ReadLine();
             int ageCheck = Convert.ToInt32(age);
+            if (ValidateAge(age))
+            {
+                Console.WriteLine("Age recorded successfully");
+            } else
+            {
+                Console.WriteLine("Too old Invalid Input");
+            }
+            SectionSeparator("Gender");
 
         }
 
@@ -52,7 +60,7 @@ namespace COMP003A.FinalAssignment
 
         static bool ValidateName(string name)
         {
-            string pattern = @"[Aa-Zz]\w";
+            string pattern = @"\w[Aa-Zz]";
 
             if (Regex.IsMatch(pattern, name))
             {
@@ -62,5 +70,19 @@ namespace COMP003A.FinalAssignment
                 return false;
             }
         }
+
+        static bool ValidateAge(string age)
+        {
+            string pattern = @"\d{1}[1-2]\d{1}[9-0]\d{2}[0-9]";
+
+            if (Regex.IsMatch(pattern, age)) 
+            { 
+                return true;
+            } else 
+            { 
+                return false;
+            }
+        }
+
     }
 }
