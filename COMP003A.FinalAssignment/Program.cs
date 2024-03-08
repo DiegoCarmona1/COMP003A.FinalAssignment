@@ -179,7 +179,11 @@ namespace COMP003A.FinalAssignment
             }
         }
 
-
+        /// <summary>
+        /// Validates the regularity of user exercise based on appropriate response presented.
+        /// </summary>
+        /// <param name="pace"></param>
+        /// <returns>Boolean true or false</returns>
         static bool ValidateRegularity(char pace)
         {
             string paceCheck = Convert.ToString(pace);
