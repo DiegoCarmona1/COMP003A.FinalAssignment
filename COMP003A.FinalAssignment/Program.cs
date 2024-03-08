@@ -44,6 +44,17 @@ namespace COMP003A.FinalAssignment
                 Console.WriteLine("Too old Invalid Input");
             }
             SectionSeparator("Gender");
+            Console.WriteLine("Please Enter Gender (M, F, or O)");
+            string gender = Console.ReadLine();
+            if (ValidateGender(gender))
+            {
+                Console.WriteLine("Gender recorded successfully");
+            } else
+            {
+                Console.WriteLine("Invalid Input");
+            }
+            SectionSeparator("Questionnaire");
+
 
         }
 
@@ -57,10 +68,14 @@ namespace COMP003A.FinalAssignment
         }
 
 
-
+        /// <summary>
+        /// Validates the users name as being a string of alphetibetical characters.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Boolean true or false</returns>
         static bool ValidateName(string name)
         {
-            string pattern = @"\w[Aa-Zz]";
+            string pattern = @"\w[a-z]";
 
             if (Regex.IsMatch(pattern, name))
             {
@@ -70,16 +85,39 @@ namespace COMP003A.FinalAssignment
                 return false;
             }
         }
-
+        /// <summary>
+        /// Used to validate the age of the user using the birth year that cannot be older than 1900.
+        /// </summary>
+        /// <param name="age"></param>
+        /// <returns>Boolean true or false</returns>
         static bool ValidateAge(string age)
         {
-            string pattern = @"\d{1}[1-2]\d{1}[9-0]\d{2}[0-9]";
+            string pattern = @"\d{1}(1-2)\d{1}(9-0)\d{2}";
 
             if (Regex.IsMatch(pattern, age)) 
             { 
                 return true;
             } else 
             { 
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Validates users Gender based upon the available character selection. Does not allow more than one character.
+        /// </summary>
+        /// <param name="gender"></param>
+        /// <returns></returns>
+        static bool ValidateGender(string gender)
+        {
+            string pattern = @".\w([Mm]|[Ff]|[Oo])";
+
+            if (Regex.IsMatch(pattern, gender))
+            {
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }
