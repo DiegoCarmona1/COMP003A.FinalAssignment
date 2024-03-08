@@ -66,7 +66,7 @@ namespace COMP003A.FinalAssignment
             {
                 Console.WriteLine("Invalid Input (fatty)");
             }
-            Console.WriteLine("Next question: How often do you exercise? Often(O), Sometimes(S), Rarely(R)?");
+            Console.WriteLine("Second question: How often do you exercise? Often(O), Sometimes(S), Rarely(R)?");
             string regularity = Console.ReadLine();
             char pace = Convert.ToChar(regularity);
             if (ValidateRegularity(pace))
@@ -76,7 +76,77 @@ namespace COMP003A.FinalAssignment
             {
                 Console.WriteLine("That is an Invalid Input");
             }
-
+            Console.WriteLine("Third question: Do you have any underlying conditions?");
+            string conditions = Console.ReadLine();
+            Console.WriteLine("Fourth question: What is your target weight?");
+            string target = Console.ReadLine();
+            int targetWeight = Convert.ToInt32(target);
+            if (ValidateWeight(targetWeight))
+            {
+                Console.WriteLine("Target weight recorded");
+            } else
+            {
+                Console.WriteLine("Invalid Input");
+            }
+            Console.WriteLine("Fifth question: What is your height?");
+            string heightCheck = Console.ReadLine();
+            int height = Convert.ToInt32(heightCheck);
+            if (ValidateHeight(height))
+            {
+                Console.WriteLine("Height Recorded");
+            }else
+            {
+                Console.WriteLine("Invalid Height Inputted");
+            }
+            Console.WriteLine("Sixth Question: How many days of the week do you wish to exercise? (#1-7 days of the week)");
+            string weeekly = Console.ReadLine();
+            int weeklyRoutine = Convert.ToInt32(weeekly);
+            if (ValidateRoutine())
+            {
+                Console.WriteLine("Weekly Routine Updated");
+            }else
+            {
+                Console.WriteLine("Sorry Invalid INput Entered");
+            }
+            Console.WriteLine("Seventh question: Do you prefer exercise outside or indoors?(O or I)");
+            string areaCheck = Console.ReadLine();
+            char area = Convert.ToChar(areaCheck);
+            if (ValidateArea(area))
+            {
+                Console.WriteLine("Preference recorded");
+            }else
+            {
+                Console.WriteLine("Invalid Input Entered");
+            }
+            Console.WriteLine("Eigth question: Equipment or No? (E or N)");
+            string equipCheck = Console.ReadLine();
+            char equip = Convert.ToChar(equipCheck);
+            if (ValidateEquip(equip))
+            {
+                Console.WriteLine("Preference recorded");
+            }else
+            {
+                Console.WriteLine("Invalid Input Entered");
+            }
+            Console.WriteLine("Ninth question: Enter email address");
+            string email = Console.ReadLine();
+            if (ValidateEmail(email))
+            {
+                Console.WriteLine("Email recorded");
+            } else
+            {
+                Console.WriteLine("Improper Input");
+            }
+            Console.WriteLine("Tenth question: Enter Password");
+            string password = Console.ReadLine();
+            Console.WriteLine("Confirm password");
+            if VallidatePassword(password)) 
+            {
+                Console.WriteLine("Password Recorded");
+            } else
+            {
+                Console.WriteLine("Password does not fit standards");
+            }
         }
 
         /// <summary>
