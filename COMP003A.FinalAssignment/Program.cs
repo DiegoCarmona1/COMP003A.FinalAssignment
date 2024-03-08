@@ -30,12 +30,12 @@ namespace COMP003A.FinalAssignment
                 Console.WriteLine("Last name recorded successfully");
             } else
             {
-                Console.WriteLine("Invalid Input");
+                Console.WriteLine("Invalid Lastname");
             }
             SectionSeparator("Age");
             Console.WriteLine("Please Enter birth year");
-            string age = Console.ReadLine();
-            int ageCheck = Convert.ToInt32(age);
+            string ageCheck = Console.ReadLine();
+            int age = Convert.ToInt32(ageCheck);
             if (ValidateAge(age))
             {
                 Console.WriteLine("Age recorded successfully");
@@ -45,7 +45,8 @@ namespace COMP003A.FinalAssignment
             }
             SectionSeparator("Gender");
             Console.WriteLine("Please Enter Gender (M, F, or O)");
-            string gender = Console.ReadLine();
+            string genderCheck = Console.ReadLine();
+            char gender = Convert.ToChar(genderCheck);
             if (ValidateGender(gender))
             {
                 Console.WriteLine("Gender recorded successfully");
@@ -54,7 +55,27 @@ namespace COMP003A.FinalAssignment
                 Console.WriteLine("Invalid Input");
             }
             SectionSeparator("Questionnaire");
-
+            Console.WriteLine("Answer these 10 questions for us please:");
+            Console.WriteLine("First question: What is your current weight? (No need to be embarrassed)");
+            string weightCheck = Console.ReadLine();
+            int weight = Convert.ToInt32(weightCheck);
+            if (ValidateWeight(weight))
+            {
+                Console.WriteLine("Weight successfully recorded");
+            } else
+            {
+                Console.WriteLine("Invalid Input (fatty)");
+            }
+            Console.WriteLine("Next question: How often do you exercise? Often(O), Sometimes(S), Rarely(R)?");
+            string regularity = Console.ReadLine();
+            char pace = Convert.ToChar(regularity);
+            if (ValidateRegularity(pace))
+            {
+                Console.WriteLine("Regularity Recorded");
+            } else
+            {
+                Console.WriteLine("That is an Invalid Input");
+            }
 
         }
 
@@ -75,9 +96,9 @@ namespace COMP003A.FinalAssignment
         /// <returns>Boolean true or false</returns>
         static bool ValidateName(string name)
         {
-            string pattern = @"\w[a-z]";
+            string pattern = @"^\w{2,}$";
 
-            if (Regex.IsMatch(pattern, name))
+            if (Regex.IsMatch(name, pattern))
             {
                 return true;
             } else
@@ -86,21 +107,30 @@ namespace COMP003A.FinalAssignment
             }
         }
         /// <summary>
-        /// Used to validate the age of the user using the birth year that cannot be older than 1900.
+        /// Used to validate the age of the user using the birth year that cannot be older than 1900 or beyond the current one.
         /// </summary>
         /// <param name="age"></param>
         /// <returns>Boolean true or false</returns>
-        static bool ValidateAge(string age)
+        static bool ValidateAge(int age)
         {
-            string pattern = @"\d{1}(1-2)\d{1}(9-0)\d{2}";
-
-            if (Regex.IsMatch(pattern, age)) 
-            { 
-                return true;
-            } else 
-            { 
+            if (age > 2024)
+            {
                 return false;
+            }  else
+            {
+                string goodToGo = Convert.ToString(age);
+                string pattern = @"[12]{1}[09]{1}[0-9]{2}$";
+
+                if (Regex.IsMatch(goodToGo, pattern))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            
         }
 
         /// <summary>
@@ -108,15 +138,57 @@ namespace COMP003A.FinalAssignment
         /// </summary>
         /// <param name="gender"></param>
         /// <returns></returns>
-        static bool ValidateGender(string gender)
+        static bool ValidateGender(char gender)
         {
-            string pattern = @".\w([Mm]|[Ff]|[Oo])";
+            string genderCheck = Convert.ToString(gender);
+            string pattern = @"^[Mm]|[Ff]|[Oo]";
 
-            if (Regex.IsMatch(pattern, gender))
+            if (Regex.IsMatch(genderCheck, pattern))
             {
                 return true;
             }
             else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Vaalidates the weight of the user
+        /// </summary>
+        /// <param name="weight"></param>
+        /// <returns>Boolean True or False</returns>
+        static bool ValidateWeight(int weight)
+        {
+            string pattern = @"[123]{1}\d{1,}";
+            if (weight > 400)
+            {
+                return false;
+            } else
+            {
+                string patternRec = Convert.ToString(weight);
+
+                if (Regex.IsMatch(patternRec, pattern))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        static bool ValidateRegularity(char pace)
+        {
+            string paceCheck = Convert.ToString(pace);
+            string pattern = @"^[Oo]|[Ss]|[Rr]";
+
+            if (Regex.IsMatch (paceCheck, pattern))
+            {
+                return true ;
+            }else
             {
                 return false;
             }
