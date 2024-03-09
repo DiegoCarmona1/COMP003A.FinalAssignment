@@ -23,7 +23,7 @@ namespace COMP003A.FinalAssignment
             {
                 Console.WriteLine("Invalid Name");
             }
-            Console.WriteLine("Pleaase enter Last name");
+            Console.WriteLine("Please enter Last name");
             string lastName = Console.ReadLine();
             if (ValidateName(lastName))
             {
@@ -89,24 +89,36 @@ namespace COMP003A.FinalAssignment
                 Console.WriteLine("Invalid Input");
             }
             Console.WriteLine("Fifth question: What is your height?");
-            string heightCheck = Console.ReadLine();
-            int height = Convert.ToInt32(heightCheck);
-            if (ValidateHeight(height))
+            Console.WriteLine("Feet?");
+            string feetHeight = Console.ReadLine();
+            int feet = Convert.ToInt32(feetHeight);
+            if (ValidateHeight(feet))
             {
                 Console.WriteLine("Height Recorded");
-            }else
+            }
+            else
             {
                 Console.WriteLine("Invalid Height Inputted");
             }
-            Console.WriteLine("Sixth Question: How many days of the week do you wish to exercise? (#1-7 days of the week)");
-            string weeekly = Console.ReadLine();
-            int weeklyRoutine = Convert.ToInt32(weeekly);
-            if (ValidateRoutine())
+            Console.WriteLine("Inches?");
+            string inchesHeight = Console.ReadLine();
+            int inches = Convert.ToInt32(inchesHeight);
+            if (ValidateHeight(inches))
+            {
+                Console.WriteLine("Height Recorded");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Height Inputted");
+            }
+            Console.WriteLine("Sixth Question: What days of the week do you wish to exercise? (M, T, W, Th, F, S, Su)");
+            string weeklyRoutine = Console.ReadLine();
+            if (ValidateRoutine(weeklyRoutine))
             {
                 Console.WriteLine("Weekly Routine Updated");
             }else
             {
-                Console.WriteLine("Sorry Invalid INput Entered");
+                Console.WriteLine("Sorry Invalid Input Entered or Overly frequent training selected (rest is important).");
             }
             Console.WriteLine("Seventh question: Do you prefer exercise outside or indoors?(O or I)");
             string areaCheck = Console.ReadLine();
@@ -137,10 +149,9 @@ namespace COMP003A.FinalAssignment
             {
                 Console.WriteLine("Improper Input");
             }
-            Console.WriteLine("Tenth question: Enter Password");
+            Console.WriteLine("Tenth question: Enter Password. Must have at least 5 letters, 3 numbers, a symbol, and must begin with the # sign");
             string password = Console.ReadLine();
-            Console.WriteLine("Confirm password");
-            if VallidatePassword(password)) 
+            if (ValidatePassword(password)) 
             {
                 Console.WriteLine("Password Recorded");
             } else
@@ -152,12 +163,21 @@ namespace COMP003A.FinalAssignment
         /// <summary>
         /// USed to separate the different information sections of the console
         /// </summary>
-        /// <param name="section"></param>
+        /// <param name="section">Stirng Input</param>
         static void SectionSeparator(string section)
         {
             Console.WriteLine("".PadRight(50, '*') + $"\n\t\t{section} Section\n" + "".PadRight(50, '*'));
         }
 
+        /// <summary>
+        /// Calculates the age of teh user using teh inputted birth year.
+        /// </summary>
+        /// <param name="ageYear">Integer input</param>
+        /// <returns>Age of user based upon birth year input</returns>
+        static int AgeCalculator(int birthYear)
+        {
+            return birthYear - 2024;
+        }
 
         /// <summary>
         /// Validates the users name as being a string of alphetibetical characters.
@@ -166,7 +186,7 @@ namespace COMP003A.FinalAssignment
         /// <returns>Boolean true or false</returns>
         static bool ValidateName(string name)
         {
-            string pattern = @"^\w{2,}$";
+            string pattern = @"^[A-Za-z]{2,}$";
 
             if (Regex.IsMatch(name, pattern))
             {
@@ -206,8 +226,8 @@ namespace COMP003A.FinalAssignment
         /// <summary>
         /// Validates users Gender based upon the available character selection. Does not allow more than one character.
         /// </summary>
-        /// <param name="gender"></param>
-        /// <returns></returns>
+        /// <param name="gender">Character input</param>
+        /// <returns>Boolean true or false</returns>
         static bool ValidateGender(char gender)
         {
             string genderCheck = Convert.ToString(gender);
@@ -268,5 +288,111 @@ namespace COMP003A.FinalAssignment
             }
         }
 
+        /// <summary>
+        /// Validates the height inputted by the user
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns>Boolean true or false</returns>
+        static bool ValidateHeight(int height)
+        {
+            string heightCheck = Convert.ToString(height);
+            string pattern = @"\d{1}";
+
+            if (Regex.IsMatch(heightCheck, pattern))
+            {
+                return true ;
+            }else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Validates the Weekly routine selected by the user
+        /// </summary>
+        /// <param name="weekDay"></param>
+        /// <returns>Boolean true or false</returns>
+        static bool ValidateRoutine(string weekDay)
+        {
+            string pattern = @"[MmTtWwHhFfSsUu]{1,5}";
+
+            if (Regex.IsMatch(weekDay, pattern))
+            {
+                return true ;
+            }else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Valiidates environmental preference given by user
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns>Boolean true or false</returns>
+        static bool ValidateArea(char area)
+        {
+            string areaCheck = Convert.ToString(area);
+            string pattern = @"[OoIi]{1}";
+
+            if (Regex.IsMatch(areaCheck, pattern))
+            {
+                return true ;
+            }else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Validates equipment usage preference
+        /// </summary>
+        /// <param name="equip"></param>
+        /// <returns>Boolean true or false</returns>
+        static bool ValidateEquip(char equip)
+        {
+            string equipCheck = Convert.ToString(equip);
+            string pattern = @"[EeNn]{1}";
+
+            if (Regex.IsMatch(equipCheck, pattern))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
+
+
+        static bool ValidateEmail(string email)
+        {
+            string pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+
+            if (Regex.IsMatch(email, pattern)) 
+            {
+                return true; 
+            }else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Validates the efficacy of the password inputted by the user
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>Boolean true or false</returns>
+        static bool ValidatePassword(string password)
+        {
+            string pattern = @"^#[A-Za-z]{5,}\d{3,}\W{1,}";
+
+            if (Regex.IsMatch(password, pattern))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
     }
 }
